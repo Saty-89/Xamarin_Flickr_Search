@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:XamarinFlickr.Views"
+             x:Class="XamarinFlickr.Views.HomePage"
+             NavigationPage.HasNavigationBar="False">
+
+    <StackLayout BackgroundColor="{StaticResource flickrNone}">
+
+        <Grid HorizontalOptions="Fill" VerticalOptions="Start" Padding="0,30" Margin="0,0,0,20" BackgroundColor="{StaticResource flickrBlack}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Ellipse Fill="Blue" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="30" HeightRequest="30" />
+            </StackLayout>
+            <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Ellipse Fill="Magenta" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="30" HeightRequest="30" />
+            </StackLayout>
+            <Label Grid.Column="2" Text="flickr Search" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="45" FontAttributes="Bold" />
+        </Grid>
+
+        <Button Text="Search photos" CornerRadius="5" Margin="20,5" Padding="5,25" Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:MainPage}" />
+        <Button Text="About" CornerRadius="5" Margin="20,5" Padding="5,25" Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:AboutPage}" />
+
+    </StackLayout>
+</ContentPage>

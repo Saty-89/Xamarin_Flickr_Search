@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinFlickr.Views"
+             xmlns:viewmodels="clr-namespace:XamarinFlickr.ViewModels"
+             x:Class="XamarinFlickr.Views.MainPage"
+             Title="Photos">
+
+    <ContentPage.BindingContext>
+        <viewmodels:SearchPhotosViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical" Spacing="5">
+
+        <SearchBar x:Name="srchBarPhotos" VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   BackgroundColor="White" TextColor="Black" CancelButtonColor="Black"
+                   Placeholder="Search photos..." PlaceholderColor="Gray"
+                   SearchCommand="{Binding SearchPhotos}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference srchBarPhotos}}" />
+
+        <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color="{StaticResource flickrBlue}" />
+
+        <ScrollView Margin="2">
+            <FlexLayout x:Name="flexLayout" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Wrap="Wrap" JustifyContent="SpaceAround" AlignItems="Center"
+                        BindableLayout.ItemsSource="{Binding SearchResults}" BackgroundColor="{StaticResource flickrNone}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <ImageButton Source="{Binding ImageSourceS}" MinimumWidthRequest="{Binding ImageWidthS}" MinimumHeightRequest="{Binding ImageHeightS}"
+                                     Clicked="ImageButton_Clicked" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </ScrollView>
+
+    </StackLayout>
+
+</ContentPage>
