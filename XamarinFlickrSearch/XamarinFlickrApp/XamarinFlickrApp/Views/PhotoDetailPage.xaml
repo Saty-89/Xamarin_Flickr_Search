@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:XamarinFlickr.ViewModels"
+             x:Class="XamarinFlickr.Views.PhotoDetailPage"
+             Title="Photo detail">
+
+    <ContentPage.BindingContext>
+        <viewmodels:PhotoDetailViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical" Padding="5" Spacing="5" BindingContext="{Binding PhotoModel}">
+        <Label Text="{Binding Title}" TextColor="Black" FontSize="Large" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+        <Label Text="{Binding OwnerName, StringFormat='by {0}'}" TextColor="Black" FontSize="Large" FontAttributes="None" VerticalOptions="Start" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Padding="5" Spacing="8">
+                <Image Source="{Binding ImageSource}" />
+                <Label Margin="15,5" Text="{Binding Views, StringFormat='{0} views'}" TextColor="Black" FontSize="Medium" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Margin="15,5" Text="{Binding Description.Content}" TextColor="Black" FontSize="Medium" FontAttributes="Italic" VerticalOptions="Start" HorizontalOptions="StartAndExpand" IsVisible="{Binding HasDescription}" />
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

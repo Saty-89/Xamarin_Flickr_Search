@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFlickr.Models;
 using XamarinFlickr.ViewModels;
@@ -12,9 +6,9 @@ using XamarinFlickr.ViewModels;
 namespace XamarinFlickr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PhotoDetail : ContentPage
+    public partial class PhotoDetailPage : ContentPage
     {
-        public PhotoDetail(FlickrPhotoModel photoModel)
+        public PhotoDetailPage(FlickrPhotoModel photoModel)
         {
             InitializeComponent();
 

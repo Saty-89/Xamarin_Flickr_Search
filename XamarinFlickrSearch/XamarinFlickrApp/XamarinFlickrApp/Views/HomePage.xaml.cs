@@ -16,8 +16,7 @@ namespace XamarinFlickr.Views
 
             NavigateCommand = new Command<Type>(async (Type pageType) =>
             {
-                Page page = (Page)Activator.CreateInstance(pageType);
-                await Navigation.PushAsync(page);
+                await Navigation.PushAsync((Page)Activator.CreateInstance(pageType));
             });
 
             BindingContext = this;

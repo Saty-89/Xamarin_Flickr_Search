@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:XamarinFlickr.Views"
              xmlns:viewmodels="clr-namespace:XamarinFlickr.ViewModels"
-             x:Class="XamarinFlickr.Views.MainPage"
+             x:Class="XamarinFlickr.Views.SearchPhotoPage"
              Title="Photos">
 
     <ContentPage.BindingContext>
@@ -18,14 +17,22 @@
                    SearchCommand="{Binding SearchPhotos}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference srchBarPhotos}}" />
 
-        <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color="{StaticResource flickrBlue}" />
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Black" />
 
         <ScrollView Margin="2">
+            <ScrollView.Triggers>
+                <DataTrigger TargetType="ScrollView" Binding="{Binding IsBusy}" Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+                <DataTrigger TargetType="ScrollView" Binding="{Binding IsBusy}" Value="False">
+                    <Setter Property="IsVisible" Value="True" />
+                </DataTrigger>
+            </ScrollView.Triggers>
             <FlexLayout x:Name="flexLayout" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Wrap="Wrap" JustifyContent="SpaceAround" AlignItems="Center"
                         BindableLayout.ItemsSource="{Binding SearchResults}" BackgroundColor="{StaticResource flickrNone}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <ImageButton Source="{Binding ImageSourceS}" MinimumWidthRequest="{Binding ImageWidthS}" MinimumHeightRequest="{Binding ImageHeightS}"
+                        <ImageButton Source="{Binding ImageSourceQ}" WidthRequest="100" HeightRequest="100"
                                      Clicked="ImageButton_Clicked" />
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

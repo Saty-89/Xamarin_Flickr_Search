@@ -22,8 +22,11 @@
             <Label Grid.Column="2" Text="flickr Search" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="45" FontAttributes="Bold" />
         </Grid>
 
-        <Button Text="Search photos" CornerRadius="5" Margin="20,5" Padding="5,25" Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:MainPage}" />
+        <Button Text="Infinite scroll search" CornerRadius="5" Margin="20,5" Padding="5,25" Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:InfiniteScrollPhotoPage}" />
+        <Button Text="Search photos" CornerRadius="5" Margin="20,5" Padding="5,25" Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:SearchPhotoPage}" />
         <Button Text="About" CornerRadius="5" Margin="20,5" Padding="5,25" Command="{Binding NavigateCommand}" CommandParameter="{x:Type views:AboutPage}" />
+
+        <Label Text="All the credits go to Flickr (https://www.flickr.com/) and photo authors." Margin="5,10,5,5" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="Gray" FontSize="15" />
 
     </StackLayout>
 </ContentPage>

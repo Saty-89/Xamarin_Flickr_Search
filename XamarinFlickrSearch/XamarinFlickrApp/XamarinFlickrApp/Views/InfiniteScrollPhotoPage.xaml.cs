@@ -1,5 +1,9 @@
 ﻿using System;
-using System.Windows.Input;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFlickr.Models;
@@ -7,23 +11,22 @@ using XamarinFlickr.Models;
 namespace XamarinFlickr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage
+    public partial class InfiniteScrollPhotoPage : ContentPage
     {
-        public MainPage()
+        public InfiniteScrollPhotoPage()
         {
             InitializeComponent();
         }
 
-        private void ImageButton_Clicked(object sender, EventArgs e)
+        private async void ImageButton_Clicked(object sender, EventArgs e)
         {
-            View button = sender as View;
+            var button = sender as View;
             if (button != null)
             {
                 FlickrPhotoModel photoModel = button.BindingContext as FlickrPhotoModel;
                 if (photoModel != null)
                 {
-                    Page page = (Page)Activator.CreateInstance(typeof(PhotoDetail), photoModel);
-                    Application.Current.MainPage.Navigation.PushAsync(page);
+                    await Navigation.PushAsync(new PhotoDetailPage(photoModel));
                 }
             }
         }

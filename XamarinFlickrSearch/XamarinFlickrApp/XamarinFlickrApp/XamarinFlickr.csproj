@@ -19,8 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\PhotoDetail.xaml.cs">
-      <DependentUpon>PhotoDetail.xaml</DependentUpon>
+    <Compile Update="Views\SearchPhotoPage.xaml.cs">
+      <DependentUpon>SearchPhotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PhotoDetailPage.xaml.cs">
+      <DependentUpon>PhotoDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -31,7 +34,10 @@
     <EmbeddedResource Update="Views\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PhotoDetail.xaml">
+    <EmbeddedResource Update="Views\InfiniteScrollPhotoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PhotoDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

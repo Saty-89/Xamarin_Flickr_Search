@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:XamarinFlickr.Models"
+             xmlns:viewmodels="clr-namespace:XamarinFlickr.ViewModels"
+             x:Class="XamarinFlickr.Views.InfiniteScrollPhotoPage"
+             Title="Infinite Scroll"
+             x:DataType="viewmodels:InfiniteScrollPhotoViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:InfiniteScrollPhotoViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical" Spacing="5">
+
+        <SearchBar x:Name="srchBarPhotos" VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   BackgroundColor="White" TextColor="Black" CancelButtonColor="Black"
+                   Placeholder="Search photos..." PlaceholderColor="Gray"
+                   SearchCommand="{Binding SearchPhotos}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference srchBarPhotos}}" />
+
+        <ScrollView Margin="2" BackgroundColor="{StaticResource flickrNone}">
+            <CollectionView Margin="8" ItemSizingStrategy="MeasureFirstItem" HorizontalOptions="FillAndExpand" VerticalOptions="Start" ItemsSource="{Binding SearchResults}"
+                            RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding GetNextPage}" RemainingItemsThresholdReachedCommandParameter="{Binding Text, Source={x:Reference srchBarPhotos}}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:FlickrPhotoModel">
+                        <Grid ColumnSpacing="15" RowSpacing="5" BackgroundColor="White" Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <ImageButton Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ImageSourceQ}" WidthRequest="100" HeightRequest="100"
+                                         Clicked="ImageButton_Clicked" CornerRadius="15" />
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" MaxLines="2" LineBreakMode="TailTruncation"
+                                   HorizontalTextAlignment="Start" VerticalTextAlignment="Start" TextColor="Black" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding OwnerName, StringFormat='by {0}'}" MaxLines="3" LineBreakMode="TailTruncation"
+                                   HorizontalTextAlignment="Start" VerticalOptions="StartAndExpand" TextColor="Black" FontSize="Medium" FontAttributes="Italic" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <Grid BackgroundColor="{StaticResource flickrBlack}" Padding="10,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ActivityIndicator Grid.Column="0" VerticalOptions="Start" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="White" />
+            <Label Grid.Column="1" Text="{Binding TotalResults, StringFormat='{0:n0} results'}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                   TextColor="White" FontSize="Large" FontAttributes="None" />
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

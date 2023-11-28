@@ -4,8 +4,9 @@
              x:Class="XamarinFlickr.Views.AboutPage"
              Title="Credits">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Developed by:&#10;Francesco Vassallo" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="35" FontAttributes="Bold" />
+        <StackLayout Spacing="20" Padding="10">
+            <Label Text="Developed by:&#10;Francesco Vassallo" Margin="0,10,0,0" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" TextColor="Black" FontSize="35" FontAttributes="Bold" />
+            <Label Text="This product uses the Flickr API but is not endorsed or certified by SmugMug, Inc." HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" TextColor="Black" FontSize="28" FontAttributes="None" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

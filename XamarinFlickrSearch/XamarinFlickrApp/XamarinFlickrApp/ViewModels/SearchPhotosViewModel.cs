@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinFlickr.Models;
-using XamarinFlickr.Views;
 
 namespace XamarinFlickr.ViewModels
 {
-    public class SearchPhotosViewModel : INotifyPropertyChanged
+    public class SearchPhotosViewModel : BaseViewModel
     {
+        private bool isBusy = false;
         private List<FlickrPhotoModel> _searchResults = new List<FlickrPhotoModel>();
 
-        public bool IsRunning { get; set; } = false;
+        public bool IsBusy
+        {
+            get => isBusy;
+            set
+            {
+                isBusy = value;
+                NotifyPropertyChanged(nameof(IsBusy));
+            }
+        }
         public List<FlickrPhotoModel> SearchResults
         {
             get => _searchResults;
@@ -26,20 +32,10 @@ namespace XamarinFlickr.ViewModels
 
         public ICommand SearchPhotos => new Command<string>(async (string queryString) =>
         {
-            IsRunning = true;
-            SearchResults = await App.FlickrManager.GetPhotoResults(queryString);
-            IsRunning = false;
+            IsBusy = true;
+            SearchResults = await App.FlickrManager.GetPhotoListByText(queryString);
+            await Task.Delay(100);
+            IsBusy = false;
         });
-
-        #region INotifyPropertyChanged Implementation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion INotifyPropertyChanged Implementation
     }
 }
